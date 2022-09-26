@@ -7,31 +7,31 @@
 		<title>inicio</title>
 	</head>
 	<body>
-	<%
-	HttpSession sesion=request.getSession();
-	String isSesion = (String) sesion.getAttribute("user");
-	String userSesion = (String) sesion.getAttribute("password");
+<%
+	HttpSession sesion = request.getSession();
+	String isSesion = (String) sesion.getAttribute("login");
+	String userSesion = (String) sesion.getAttribute("user");
+	
 	if(isSesion != null && userSesion != null && isSesion.equals("true")){
-		String user;
-	%>	
-		<p>Bienvenido <%=user %></p>
-		<table>
+	%>
+		<p>Bienvenido</p>
+		<table border="1px">
 			<tr>
 				<td>
-						
+					Item1	
 				</td>
 				<td>
-					
+					Item2
 				</td>
 			</tr>
 		</table>
 		
 	<% 
-	}else{
+	 }else{
 	%>
-		<jsp:forward page="error.jsp?msg=No estás logeado"></jsp:forward>
+		 <jsp:forward page="error.jsp?msg='No estás logeado'"></jsp:forward> 
 	<% 
-	}
+	 } 
 	%>
 	</body>
 </html>

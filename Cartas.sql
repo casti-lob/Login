@@ -19,7 +19,10 @@ CREATE TABLE CARTAS
 	
 INSERT INTO USUARIO 
 VALUES('usuario','usuario');
-
+INSERT INTO USUARIO (password,nombre)
+VALUES('1234','Axiont58');
+INSERT INTO USUARIO (password,nombre)
+VALUES('keo_7','Joseba');
 
 INSERT INTO CARTAS(password,nombre,cantidad,precio,adquisicion,baraja)
 VALUES('usuario','Principe Stennis',9,6,'2015-01-20',true);
@@ -235,3 +238,4 @@ INSERT INTO CARTAS(password,nombre,cantidad,precio,adquisicion,baraja)
 VALUES('usuario','Sapo',8,60,'2015-01-20',true);
 INSERT INTO CARTAS(password,nombre,cantidad,precio,adquisicion,baraja)
 VALUES('usuario','Elemental',1,60,'2015-01-20',true);
+
