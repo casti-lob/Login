@@ -12,7 +12,7 @@
 			//conectamos a la bbdd
 			Connection conexion = DriverManager.getConnection(
 					//"jdbc:oracle:thin:@//localhost:1521/ORCLCDB.localdomain","dummy","dummy"
-					"jdbc:mysql:thin:@//localhost:3306/","cartas","dummy"
+					"jdbc:mysql://localhost:3306/cartas?useSSL=false","dummy","dummy"
 					);
 			
 			//cogemos los datos que ha insertado el usuario
