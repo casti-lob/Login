@@ -16,14 +16,7 @@
 	%>
 		<p>Bienvenido</p>
 		<table border="1px">
-			<tr>
-				<td>
-					Item1	
-				</td>
-				<td>
-					Item2
-				</td>
-			</tr>
+		
 		</table>
 		
 	<% 
