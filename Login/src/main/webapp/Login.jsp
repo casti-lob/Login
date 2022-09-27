@@ -1,3 +1,8 @@
+<%@page import="java.sql.DatabaseMetaData"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.beans.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,13 +12,14 @@
 		<title>login</title>
 	</head>
 	<body>
- 	<% 
-				//	"jdbc:mysql://localhost:3306/cartas?useSSL=false","dummy","dummy"
 			
 			//cogemos los datos que ha insertado el usuario
 			String user = request.getParameter("user");
 			String password = request.getParameter("password");
 	 		
+
+			//buscamos esos datos en la base de datos
+			
 			//comprobamos que esos datos son correctos
 			if(user.equals(nombreComprobar)&& password.equals(passwordComprobar)){
 				HttpSession sesion = request.getSession();
@@ -26,7 +32,6 @@
 		%>
 				<jsp:forward page="error.jsp?msg='ERROR'"></jsp:forward>
 		<%
-			}	
-		%>
+
 	</body>
 </html>
