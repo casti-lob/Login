@@ -1,3 +1,4 @@
+<%@page import="main.webapp.Login"%>
 <%@page import="java.sql.DatabaseMetaData"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.beans.Statement"%>
@@ -13,23 +14,22 @@
 	</head>
 	<body>
 	<% 
-		
-			
-			//Comprobamos que tiene conexion con la bbdd
 			
 			//cogemos los datos que ha insertado el usuario
 			String user = request.getParameter("user");
 			String password = request.getParameter("password");
-	 		
-			//buscamos esos datos en la base de datos
 			
 			
-		
 			//comprobamos que esos datos son correctos
-			if(user.equals(nombreComprobar)&& password.equals(passwordComprobar)){
-				HttpSession sesion = request.getSession();
+			Login l = new Login(user,password);
+			%>
+			<%= l.passwordConfirmation()%>
+	<%-- 		
+			if(l.passwordConfirmation()==true){
+				
+				/* HttpSession sesion = request.getSession();
 				sesion.setAttribute("login","true");
-				sesion.setAttribute("user",user);
+				sesion.setAttribute("user",user); */
 		%>
 				<jsp:forward page="inicio.jsp"></jsp:forward>
 		<% 
@@ -37,7 +37,7 @@
 		%>
 				<jsp:forward page="error.jsp?msg='ERROR'"></jsp:forward>
 		<%
-			}
+			} --%>
 				
 				//cerramos la conexion con la BD
 				
