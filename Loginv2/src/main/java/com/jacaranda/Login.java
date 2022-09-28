@@ -61,6 +61,8 @@ public class Login {
 		
 		return result;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
