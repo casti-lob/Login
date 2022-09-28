@@ -8,14 +8,12 @@ import java.util.Objects;
 public class Login {
 	private String nombre;
 	private String password;
-	private Connection conexion;
 	
 	public Login(String nombre, String password) {
 		super();
 		this.nombre = nombre;
 		this.password = password;
-		this.conexion= conexion;
-		conection();
+		
 	}
 
 	public String getNombre() {
@@ -34,40 +32,30 @@ public class Login {
 		this.password = password;
 	}
 	
-	public Connection getConexion() {
-		return conexion;
-	}
+	
 
-	public void setConexion(Connection conexion) {
-		this.conexion = conexion;
-	}
-
-	public static void conection() {
+	
+	public boolean passwordConfirmation() {
+		boolean result=false;
 		try {
 			
-		Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?useSSL=false","dummy","dummy");
-		
-		//para ver si tiene conexion con la BD
-		DatabaseMetaData infoBD= conexion.getMetaData();
-		System.out.println("Base de datos: " + infoBD.getDatabaseProductName());
-		System.out.println("Version: " + infoBD.getDatabaseProductVersion());
-		
-		
-		
-		
-		
-		}catch(Exception e){
-			e.getMessage();
-		}
-	}
-	
-	public static void closedBbdd()  {
-		conexion.close();	
-	}
-	
-	public static boolean passwordConfirmation() {
-		boolean result=false;
-		
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?useSSL=false","dummy","dummy");
+			
+			//para ver si tiene conexion con la BD
+			DatabaseMetaData infoBD= conexion.getMetaData();
+			System.out.println("Base de datos: " + infoBD.getDatabaseProductName());
+			System.out.println("Version: " + infoBD.getDatabaseProductVersion());
+			
+			//Consultamos la contaseña y el usuario 
+			String query ="SELECT password, nombre FROM USUARIO where password ='"+this.password+"' and nombre ='"+this.nombre+"'";
+			if(query != null) {
+				result = true;
+			}
+			conexion.close();
+			
+			}catch(Exception e){
+				e.getMessage();
+			}
 			
 		
 		
