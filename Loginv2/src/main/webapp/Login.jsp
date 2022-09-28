@@ -28,7 +28,7 @@
 				sesion.setAttribute("login","true");
 				sesion.setAttribute("user",user); */
 		%>
-				<jsp:forward page="inicio.jsp"></jsp:forward>
+				<jsp:forward page="inicio.html"></jsp:forward>
 		<% 
 			}else{
 		%>
