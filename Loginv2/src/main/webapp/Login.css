@@ -1,0 +1,20 @@
+@charset "ISO-8859-1";
+
+
+
+div{
+	margin-top: 100px
+}
+table{
+	border-radius: 20px;
+	padding: 10px;
+	background-color:#C3FFEB;
+	-webkit-box-shadow: 20px 21px 36px 7px rgba(0,0,0,0.75);
+	-moz-box-shadow: 20px 21px 36px 7px rgba(0,0,0,0.75);
+	box-shadow: 20px 21px 36px 7px rgba(0,0,0,0.75);
+	
+}
+
+td.img{
+	padding-right: 15px
+}
