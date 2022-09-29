@@ -10,3 +10,7 @@ p{
 	text-align: center;
 	font-size: 35px;
 }
+
+*{
+	background-color: red; 
+}

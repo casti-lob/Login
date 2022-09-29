@@ -8,7 +8,7 @@
 		<title>Error</title>
 	</head>
 	<body>
-		<img alt="ImgenError" src="error.png">
+		<img alt="ImgenError" src="geralSad.png">
 		<p>Error al insertar el usuario</p>
 	</body>
 </html>
