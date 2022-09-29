@@ -6,22 +6,22 @@ import java.sql.DriverManager;
 import java.util.Objects;
 
 public class Login {
-	private String nombre;
+	private String name;
 	private String password;
 	
 	public Login(String nombre, String password) {
 		super();
-		this.nombre = nombre;
+		this.name = nombre;
 		this.password = password;
 		
 	}
 
 	public String getNombre() {
-		return nombre;
+		return name;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.name = nombre;
 	}
 
 	public String getPassword() {
@@ -38,7 +38,7 @@ public class Login {
 	public boolean passwordConfirmation() {
 		boolean result=false;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?useSSL=false","dummy","dummy");
 			
 			//para ver si tiene conexion con la BD
@@ -47,7 +47,7 @@ public class Login {
 			System.out.println("Version: " + infoBD.getDatabaseProductVersion());
 			
 			//Consultamos la contaseña y el usuario 
-			String query ="SELECT password, nombre FROM USUARIO where password ='"+this.password+"' and nombre ='"+this.nombre+"'";
+			String query ="SELECT password, nombre FROM USUARIO where password ='"+this.password+"' and nombre ='"+this.name+"'";
 			if(query != null) {
 				result = true;
 			}
@@ -83,6 +83,6 @@ public class Login {
 
 	@Override
 	public String toString() {
-		return "Login [nombre=" + nombre + ", password=" + password + "]";
+		return "Login [nombre=" + name + ", password=" + password + "]";
 	}
 }

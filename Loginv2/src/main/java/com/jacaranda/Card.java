@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Card {
+public class Card  extends Login{
 	private String password;
 	private String name;
 	private double price;
@@ -14,7 +14,8 @@ public class Card {
 	private boolean active;
 	
 	public Card(String name, double prive, LocalDate acquisition, boolean active) {
-		super();
+		super(name, name);
+		this.password= super.getPassword();
 		this.name = name;
 		this.price = prive;
 		this.adquisition = acquisition;
@@ -89,10 +90,12 @@ public class Card {
 	}
 	//Modifica el active de una carta de nuestra baraja
 	public boolean setCard() {
+		boolean set = false;
 		
+		return set;
 	}
 	
-	public boolean deleteCard(int code) {
+	public boolean deleteCard(int code) {//codigo y password requeridos
 		boolean delete = false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
