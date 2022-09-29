@@ -3,7 +3,10 @@ package com.jacaranda;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.Objects;
+
+import com.mysql.cj.xdevapi.Statement;
 
 public class Login {
 	private String name;
@@ -38,22 +41,28 @@ public class Login {
 	public boolean passwordConfirmation() {
 		boolean result=false;
 		try {
-			//Class.forName("com.mysql.jdbc.Driver");
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?useSSL=false","dummy","dummy");
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","root","dummy");
 			
 			//para ver si tiene conexion con la BD
 			DatabaseMetaData infoBD= conexion.getMetaData();
 			System.out.println("Base de datos: " + infoBD.getDatabaseProductName());
 			System.out.println("Version: " + infoBD.getDatabaseProductVersion());
 			
+			Statement instruccion = (Statement) conexion.createStatement();
+			String sentencia = "select password, nombre from usuario where password ='"+this.password+"' and nombre ='"+this.name+"'";
+			ResultSet resultado = ((java.sql.Statement) instruccion).executeQuery(sentencia);
+			
 			//Consultamos la contaseña y el usuario 
-			String query ="SELECT password, nombre FROM USUARIO where password ='"+this.password+"' and nombre ='"+this.name+"'";
-			if(query != null) {
+			//String query ="SELECT password, nombre FROM USUARIO where password ='"+this.password+"' and nombre ='"+this.name+"'";
+			
+			System.out.println(resultado);
+			if(resultado != null) {
 				result = true;
 			}
 			conexion.close();
 			
-			}catch(Exception e){
+		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
 			
