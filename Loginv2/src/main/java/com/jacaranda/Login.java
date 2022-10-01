@@ -45,9 +45,9 @@ public class Login {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","root","dummy");
 			
-			PreparedStatement sentencia = cn.prepareStatement("select password, nombre from usuario where password =? and nombre =?");
-			sentencia.setString(1, password);
-			sentencia.setString(2, name);
+			PreparedStatement sentencia = cn.prepareStatement("select * from USUARIO where password=? and nombre =?;");
+			sentencia.setString(1, this.password);
+			sentencia.setString(2, this.name);
 			ResultSet rs = sentencia.executeQuery();
 			
 			System.out.println(rs.getString(1)+ " "+ rs.getString(2));
