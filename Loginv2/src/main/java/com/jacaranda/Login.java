@@ -43,39 +43,20 @@ public class Login {
 		boolean result=false;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","root","dummy");
-			
-			PreparedStatement sentencia = cn.prepareStatement("select * from USUARIO where password=? and nombre =?;");
-			sentencia.setString(1, this.password);
-			sentencia.setString(2, this.name);
+			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
+			PreparedStatement sentencia = cn.prepareStatement("select password, nombre from USUARIO where password =? and nombre =?");
+			sentencia.setString(1, password);
+			sentencia.setString(2, name);
 			ResultSet rs = sentencia.executeQuery();
-			
-			System.out.println(rs.getString(1)+ " "+ rs.getString(2));
-			rs.close();
-
-			
-			
-			/*
-			//para ver si tiene conexion con la BD
-			DatabaseMetaData infoBD= conexion.getMetaData();
-			System.out.println("Base de datos: " + infoBD.getDatabaseProductName());
-			System.out.println("Version: " + infoBD.getDatabaseProductVersion());
-			
-			//Consultamos la contaseña y el usuario 
-			//String query ="SELECT password, nombre FROM USUARIO where password ='"+this.password+"' and nombre ='"+this.name+"'";
-			
-			System.out.println(resultado);
-			if(resultado != null) {
+			if(rs.next()) {
 				result = true;
 			}
-			conexion.close();
-			*/
+			
+			rs.close();
 		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
-			
-		
-		
+
 		return result;
 	}
 	
