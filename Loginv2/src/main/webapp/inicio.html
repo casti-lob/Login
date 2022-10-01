@@ -3,33 +3,60 @@
 	<head>
 	<meta charset="UTF-8">
 	<title>Inicio</title>
+	<link rel="stylesheet" href="Inicio.css">
 	</head>
 	<body>
-	
-		<!-- agregar carta -->
-		<h2>Agregar Carta</h2>
-		<form action="agregar.jsp">
-			<p>
-				Nombre <input type="text"> <br>
-				Precio <input type="number"> <br>
+		<div align="center">
+		<table  >
+			<tr>
+				<td align="center" colspan="3">
+					<img height="" width="550px" src="https://images.gog-statics.com/934e329b61f010fb039c7a6d82b477ad254bf70a5e0a0709b4c43524645f2a42.jpg">
+				</td>
+			</tr>
+			<tr>
+				<td >
+					<!-- agregar carta -->
+					<h2>Agregar Carta</h2>
+					<form action="agregar.jsp">
+						<p>
+							Nombre <input type="text"> <br>
+						</p>
+						<p>
+							Precio <input type="number"> <br>
+							
+						</p>
+						<button>Agregar Carta</button>	
+					</form>
+				</td>
 				
-			</p>
-			<button>Agregar Carta</button>	
-		</form>
+				<td>
+					<!-- elimiar carta -->
+					<h2>Eliminar Carta</h2>
+					<form action="eliminar.jsp">
+						<p>
+							Nombre <input type="text"> <br>
+						</p>
+						<button>Eliminar Carta</button>	
+					</form>
 		
-		<!-- elimiar carta -->
-		<h2>Eliminar Carta</h2>
-		<form action="eliminar.jsp">
-			<p>
-				Nombre <input type="text"> <br>
-			</p>
-			<button>Eliminar Carta</button>	
-		</form>
+				</td>
+				
+				<td>
+					<!-- modificar carta -->
+					<h2>Modificar Carta</h2>
+					<form action="modificar.jsp">
+						<button>Modificar carta</button>
+					</form>
+				</td>
+			</tr>
+			
+
+		</table>
+		</div>
 		
-		<!-- modificar carta -->
-		<h2>Modificar Carta</h2>
-		<form action="modificar.jsp">
-			<button>Modificar carta</button>
-		</form>
+		
+		
+		
+		
 	</body>
 </html>
