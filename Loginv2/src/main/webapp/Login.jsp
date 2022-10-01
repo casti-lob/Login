@@ -1,3 +1,4 @@
+<%@page import="com.jacaranda.Card"%>
 <%@page import="com.jacaranda.Login"%>
 <%@page import="java.sql.DatabaseMetaData"%>
 <%@page import="java.sql.ResultSet"%>
@@ -24,9 +25,11 @@
 			Login l = new Login(user,password);	
 			if(l.passwordConfirmation()==true){
 				
-				/* HttpSession sesion = request.getSession();
+				
+				 HttpSession sesion = request.getSession();
 				sesion.setAttribute("login","true");
-				sesion.setAttribute("user",user); */
+				sesion.setAttribute("user",user); 
+				
 		%>
 				<jsp:forward page="inicio.html"></jsp:forward>
 		<% 

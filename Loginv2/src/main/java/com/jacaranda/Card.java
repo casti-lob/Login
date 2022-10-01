@@ -3,23 +3,26 @@ package com.jacaranda;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Card  extends Login{
+import javax.swing.JComponent;
+import javax.swing.table.DefaultTableModel;
+
+public class Card {
 	private String password;
 	private String name;
 	private double price;
 	private LocalDate adquisition ;
 	private boolean active;
+	private JComponent tr;
 	
-	public Card(String name, double prive, LocalDate acquisition, boolean active) {
-		super(name, name);
-		this.password= super.getPassword();
-		this.name = name;
-		this.price = prive;
-		this.adquisition = acquisition;
-		this.active = active;
+	public Card() {
+		
+		
+	
 	}
 
 	public String getPassword() {
@@ -65,60 +68,100 @@ public class Card  extends Login{
 	public boolean addCard() {
 		boolean add=false;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?useSSL=false","dummy","dummy");
-			
-			//para ver si tiene conexion con la BD
-			DatabaseMetaData infoBD= conexion.getMetaData();
-			System.out.println("Base de datos: " + infoBD.getDatabaseProductName());
-			System.out.println("Version: " + infoBD.getDatabaseProductVersion());
-			
-			//Consultamos la contaseña y el usuario 
-			String query ="INSERT INTO CARTAS(password,nombre,cantidad,precio,adquisicion,baraja)\r\n"
-					+ "VALUES('"+this.password+"','"+this.name+"','"+this.price+"','"+this.adquisition+"','"+this.active+"');'";
-			
-			//issues
-			if(query != null) {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
+			PreparedStatement sentencia = cn.prepareStatement("INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja) VALUES(?,?,?,?,?,?") ;
+			sentencia.setString(1, password);
+			sentencia.setString(2, name);
+			sentencia.setString(3, "precio");
+			sentencia.setString(4, "adquisicion");
+			sentencia.setString(5, "baraja");
+			ResultSet rs = sentencia.executeQuery();
+			if(rs.next()) {
 				add = true;
 			}
-			conexion.close();
 			
-			}catch(Exception e){
+			rs.close();
+		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
 		return add;
 	}
-	//Modifica el active de una carta de nuestra baraja
-	public boolean setCard() {
-		boolean set = false;
+	public DefaultTableModel showCard(){
+		System.out.println("eee");
+		String [] columName ={"password","codigo","nombre","cantidad","precio","adquisicion","baraja"};
+		String [] registro = new String[7];
+		DefaultTableModel modelo = new DefaultTableModel(null,columName);
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
+			PreparedStatement sentencia = cn.prepareStatement("SELECT * FROM CARTAS");
+			
+			
+			ResultSet rs = sentencia.executeQuery();
+			while(rs.next()) {
+				registro[0]= rs.getString("password");
+				registro[1]= rs.getString("codigo");
+				registro[2]= rs.getString("nombre");
+				registro[3]= rs.getString("cantidad");
+				registro[4]= rs.getString("precio");
+				registro[5]= rs.getString("adquisicion");
+				registro[6]= rs.getString("baraja");
+				modelo.addRow(registro);
+			}
+			
+			rs.close();
+		}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+		return modelo;
 		
+		
+	}
+	
+	//Modifica el active de una carta de nuestra baraja
+	public boolean setCard(int code) {//Consultar
+		boolean set = false;
+		boolean baraja= true;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
+			PreparedStatement sentencia = cn.prepareStatement("select baraja from CARTAS where codigo =?");
+			sentencia.setInt(1, code);
+			
+			ResultSet rs = sentencia.executeQuery();
+			if(rs.next()) {
+				//if (rs.getString(code))
+				set = true;
+			}
+			
+			rs.close();
+		}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
 		return set;
 	}
 	
 	public boolean deleteCard(int code) {//codigo y password requeridos
 		boolean delete = false;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?useSSL=false","dummy","dummy");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
+			PreparedStatement sentencia = cn.prepareStatement("delete from CARTAS where codigo =?");
+			sentencia.setInt(1, code);
 			
-			//para ver si tiene conexion con la BD
-			DatabaseMetaData infoBD= conexion.getMetaData();
-			System.out.println("Base de datos: " + infoBD.getDatabaseProductName());
-			System.out.println("Version: " + infoBD.getDatabaseProductVersion());
-			
-			//Consultamos la contaseña y el usuario 
-			String query ="DELETE FROM  CARTAS WHERE codigo ="+code+";";
-			
-			//issues
-			if(query != null) {
+			ResultSet rs = sentencia.executeQuery();
+			if(rs.next()) {
 				delete = true;
 			}
-			conexion.close();
 			
-			}catch(Exception e){
+			rs.close();
+		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
+
 		return delete;
+	
 	}
 
 	@Override
