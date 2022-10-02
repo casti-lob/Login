@@ -87,11 +87,11 @@ public class Card {
 			}
 		return add;
 	}
-	public DefaultTableModel showCard(){
+	public String showCard(){
 		System.out.println("eee");
-		String [] columName ={"password","codigo","nombre","cantidad","precio","adquisicion","baraja"};
+		
 		String [] registro = new String[7];
-		DefaultTableModel modelo = new DefaultTableModel(null,columName);
+		StringBuilder modelo = new StringBuilder();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
@@ -100,21 +100,27 @@ public class Card {
 			
 			ResultSet rs = sentencia.executeQuery();
 			while(rs.next()) {
-				registro[0]= rs.getString("password");
-				registro[1]= rs.getString("codigo");
-				registro[2]= rs.getString("nombre");
-				registro[3]= rs.getString("cantidad");
-				registro[4]= rs.getString("precio");
-				registro[5]= rs.getString("adquisicion");
-				registro[6]= rs.getString("baraja");
-				modelo.addRow(registro);
+				
+				registro[0]= "<td>"+ rs.getString("password")+"</td>";
+				registro[1]= "<td>"+rs.getString("codigo")+"</td>";
+				registro[2]= "<td>"+ rs.getString("nombre")+"</td>";
+				registro[3]= "<td>"+rs.getString("cantidad")+"</td>";
+				registro[4]= "<td>"+rs.getString("precio")+"</td>";
+				registro[5]= "<td>"+rs.getString("adquisicion")+"</td>";
+				registro[6]= "<td>"+rs.getString("baraja")+"</td>";
+				modelo.append("<tr>");
+				for (int i=0;i<registro.length;i++) {
+					modelo.append(registro[i]);
+				}
+				
+				modelo.append("</tr>");
 			}
 			
 			rs.close();
 		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
-		return modelo;
+		return modelo.toString();
 		
 		
 	}

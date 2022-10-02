@@ -14,6 +14,12 @@
 		<title>login</title>
 	</head>
 	<body>
+	<%Card c = new Card(); 
+	
+	%>
+	<table>
+	<%=c.showCard() %>
+	</table>
 	<% 
 			
 			//cogemos los datos que ha insertado el usuario
