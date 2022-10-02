@@ -19,10 +19,9 @@ public class Card {
 	private boolean active;
 	private JComponent tr;
 	
-	public Card() {
-		
-		
-	
+	public Card(String password) {
+		super();
+		this.password = password;
 	}
 
 	public String getPassword() {
@@ -88,15 +87,14 @@ public class Card {
 		return add;
 	}
 	public String showCard(){
-		System.out.println("eee");
 		
-		String [] registro = new String[7];
+		String [] registro = new String[6];
 		StringBuilder modelo = new StringBuilder();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("SELECT * FROM CARTAS");
-			
+			PreparedStatement sentencia = cn.prepareStatement("SELECT * FROM CARTAS where password =?");
+			sentencia.setString(1, password);
 			
 			ResultSet rs = sentencia.executeQuery();
 			while(rs.next()) {
@@ -104,10 +102,9 @@ public class Card {
 				registro[0]= "<td>"+ rs.getString("password")+"</td>";
 				registro[1]= "<td>"+rs.getString("codigo")+"</td>";
 				registro[2]= "<td>"+ rs.getString("nombre")+"</td>";
-				registro[3]= "<td>"+rs.getString("cantidad")+"</td>";
-				registro[4]= "<td>"+rs.getString("precio")+"</td>";
-				registro[5]= "<td>"+rs.getString("adquisicion")+"</td>";
-				registro[6]= "<td>"+rs.getString("baraja")+"</td>";
+				registro[3]= "<td>"+rs.getString("precio")+"</td>";
+				registro[4]= "<td>"+rs.getString("adquisicion")+"</td>";
+				registro[5]= "<td>"+rs.getString("baraja")+"</td>";
 				modelo.append("<tr>");
 				for (int i=0;i<registro.length;i++) {
 					modelo.append(registro[i]);
@@ -153,15 +150,16 @@ public class Card {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("delete from CARTAS where codigo =?");
+			PreparedStatement sentencia = cn.prepareStatement("delete from CARTAS where codigo = ?");
 			sentencia.setInt(1, code);
-			
-			ResultSet rs = sentencia.executeQuery();
-			if(rs.next()) {
+			String queryDelete = sentencia.toString();
+			//ResultSet rs = sentencia.executeQuery();
+			sentencia.execute(queryDelete);
+			/*if(rs.next()) {
 				delete = true;
 			}
 			
-			rs.close();
+			rs.close(); */
 		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}

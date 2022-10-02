@@ -22,8 +22,6 @@ INSERT INTO USUARIO (password,nombre)
 VALUES('1234','Axiont58');
 INSERT INTO USUARIO (password,nombre)
 VALUES('keo_7','Joseba');
-INSERT INTO USUARIO 
-VALUES('manolo','pirulo');
 
 INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja)
 VALUES('usuario','Principe Stennis',6,'2015-01-20',true);
@@ -240,3 +238,11 @@ VALUES('usuario','Sapo',60,'2015-01-20',true);
 INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja)
 VALUES('usuario','Elemental',60,'2015-01-20',true);
 
+INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja)
+VALUES('1234','Principe Stennis',6,'2015-01-20',true);
+INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja)
+VALUES('1234','Fortest',60,'2015-01-20',true);
+INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja)
+VALUES('1234','Señuelo',60,'2015-01-20',true);
+INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja)
+VALUES('1234','Cuerno de combate',60,'2015-01-20',true);

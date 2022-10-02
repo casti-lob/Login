@@ -14,12 +14,6 @@
 		<title>login</title>
 	</head>
 	<body>
-	<%Card c = new Card(); 
-	
-	%>
-	<table>
-	<%=c.showCard() %>
-	</table>
 	<% 
 			
 			//cogemos los datos que ha insertado el usuario
@@ -34,7 +28,8 @@
 				
 				 HttpSession sesion = request.getSession();
 				sesion.setAttribute("login","true");
-				sesion.setAttribute("user",user); 
+				sesion.setAttribute("user",user);
+				
 				
 		%>
 				<jsp:forward page="inicio.html"></jsp:forward>
