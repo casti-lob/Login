@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" href="MostrarCartas.css">
 		<title>Insert title here</title>
 	</head>
 	<body>
@@ -14,8 +15,10 @@
 		Card c = new Card(m.getPasswBD()); 
 	
 	%>
+	<div>
 	<table>
 	<%=c.showCard() %>
 	</table>
+	</div>
 	</body>
 </html>
