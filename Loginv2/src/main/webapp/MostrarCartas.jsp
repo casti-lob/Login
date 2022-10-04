@@ -15,10 +15,10 @@
 		Card c = new Card(m.getPasswBD()); 
 	
 	%>
-	<div>
-	<table>
-	<%=c.showCard() %>
-	</table>
+	<div >
+		<table border="5" >
+			<%=c.showCard() %>
+		</table>
 	</div>
 	</body>
 </html>
