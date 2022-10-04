@@ -1,5 +1,8 @@
 @charset "ISO-8859-1";
-
+*{
+	font-family: Angelrhapsody;
+	font-size: 40px;
+}
 td{
 	padding: 10px
 	
@@ -21,4 +24,11 @@ body{
 	background-size: cover;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
+}
+
+@font-face {
+  font-family: Angelrhapsody;
+  src: url('Angelrhapsody.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
 }
