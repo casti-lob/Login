@@ -1,3 +1,5 @@
+<%@page import="com.jacaranda.Card"%>
+ <%@page import="com.jacaranda.Login"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -13,8 +15,13 @@
 		String userSesion = (String) sesion.getAttribute("user");
 		
 		if(isSesion != null && userSesion != null && isSesion.equals("true")){
+			Login m = new Login();
+			String password = m.getPasswBD();
+			Card c = new Card(password); 
+			int code = Integer.parseInt(request.getParameter("key"));
+			c.setCard(code);
 		%>
-			
+				<jsp:forward page="inicio.html"></jsp:forward>
 		 }else{
 		%>
 			 <jsp:forward page="error.jsp?msg='No estás logeado'"></jsp:forward> 

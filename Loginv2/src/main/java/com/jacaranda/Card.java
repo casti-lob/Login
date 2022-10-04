@@ -71,18 +71,13 @@ public class Card {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja) VALUES(?,?,?,?,NOW(),?") ;
+			PreparedStatement sentencia = cn.prepareStatement("INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja) VALUES(?,?,?,NOW(),?)");
 			sentencia.setString(1, this.password);
 			sentencia.setString(2, name);
 			sentencia.setDouble(3, cost);
-			
-			sentencia.setBoolean(5, active);
-			ResultSet rs = sentencia.executeQuery();
-			if(rs.next()) {
-				add = true;
-			}
-			
-			rs.close();
+			sentencia.setBoolean(4, active);
+			sentencia.executeUpdate();
+			add = true;
 		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -125,22 +120,27 @@ public class Card {
 	}
 	
 	//Modifica el active de una carta de nuestra baraja
-	public boolean setCard() {//Consultar
+	public boolean setCard(int code) {
 		boolean set = false;
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja)VALUES(?,?,?,?,?);");
-			//sentencia.setInt(1, code);
 			
-			ResultSet rs = sentencia.executeQuery();
-			if(rs.next()) {
-				//if (rs.getString(code))
-				set = true;
+			PreparedStatement sentencia1 = cn.prepareStatement("SELECT baraja FROM CARTAS where codigo =?");
+			sentencia1.setInt(1, code);
+			ResultSet rs = sentencia1.executeQuery();
+			
+			boolean num = false;
+			if(rs.toString().equals("1")) {
+				num = true;
 			}
+			PreparedStatement sentencia = cn.prepareStatement("UPDATE CARTAS SET baraja = ? WHERE password = ?;");
+			sentencia.setBoolean(1, num);
+			sentencia.setInt(2, code);
 			
-			rs.close();
+			sentencia.executeUpdate();
+			set = true;
 		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
@@ -155,10 +155,7 @@ public class Card {
 			PreparedStatement sentencia = cn.prepareStatement("DELETE FROM CARTAS WHERE codigo = ?");
 			sentencia.setInt(1, code);
 			
-			
 			sentencia.executeUpdate();
-			
-			
 			
 			PreparedStatement sentencia2 = cn.prepareStatement("select codigo from CARTAS where codigo =?");
 			sentencia2.setInt(1, code);
@@ -166,9 +163,7 @@ public class Card {
 			ResultSet rs = sentencia.executeQuery();
 			if(!rs.next()) {
 				delete = true;
-			}
-			
-			
+			}	
 			
 			cn.close();
 		}catch(Exception e){
