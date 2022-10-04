@@ -18,15 +18,22 @@
 					<!-- agregar carta -->
 					<h2>Agregar Carta</h2>
 					<form action="agregar.jsp">
+
+						<p>
+							Nombre <input type="text" name="nameInput"> <br>
+
 						<img width="150px"  src="add.png" >
-						<!-- <p>
-							Nombre <input type="text"> <br>
+
 						</p>
 						<p>
-							Precio <input type="number"> <br>
+							Precio <input type="number" name="priceInput"> <br>
 							
 						</p>
-						<button>Agregar Carta</button>	 -->
+						<p>
+							<input type="checkbox" name="active" checked="checked"> Activo
+						</p>
+						<button>Agregar Carta</button>	
+
 					</form>
 				</td>
 				
@@ -47,8 +54,11 @@
 					<!-- modificar carta -->
 					<h2>Modificar Carta</h2>
 					<form action="modificar.jsp">
+
+						Codigo <input name="key" type="number"> <br>
+						<button>Modificar carta</button>
 						<img width="150px" alt="" src="mof.png">
-						<!-- <button>Modificar carta</button> -->
+
 					</form>
 				</td>
 			</tr>
