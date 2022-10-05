@@ -22,13 +22,17 @@
 		List<Card> list = c.showCard();
 		StringBuilder element = new StringBuilder(); 
 		element.append("<table>");
+		element.append("<tr><td>Contraseña</td> <td>Código</td><td>Nombre</td><td>Precio</td><td>Fecha Adquisición</td><td>Carta en Uso</td></tr>");
 		for(int i =0;i<list.size();i++){
 			element.append("<tr>");
-			element.append("<td>"+list.get(0)+"</td>");
-			element.append("<td>"+list.get(1)+"</td>");
-			element.append("<td>"+list.get(2)+"</td>");
-			element.append("<td>"+list.get(3)+"</td>");
-			element.append("<td>"+list.get(4)+"</td>");
+			element.append("<td>"+list.get(i).getPassword()+"</td>");
+			element.append("<td>"+list.get(i).getCode()+"</td>");
+			element.append("<td>"+list.get(i).getName()+"</td>");
+			element.append("<td>"+list.get(i).getPrice()+"</td>");
+			element.append("<td>"+list.get(i).getAdquisition()+"</td>");
+			element.append("<td>"+list.get(i).getActive()+"</td>");
+			element.append("<td><a href='eliminar.jsp?key="+list.get(i).getCode()+"'>Borrar</a></td>");
+			element.append("<td><a href='modificar.jsp?key="+list.get(i).getCode()+"'>Modificar</a></td>");
 			element.append("</tr>");
 		}
 		element.append("</table>");

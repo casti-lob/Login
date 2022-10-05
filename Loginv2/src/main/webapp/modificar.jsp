@@ -21,7 +21,7 @@
 			int code = Integer.parseInt(request.getParameter("key"));
 			c.setCard(code);
 		%>
-				<jsp:forward page="inicio.html"></jsp:forward>
+				<jsp:forward page="MostrarCartas.jsp"></jsp:forward>
 		 }else{
 		%>
 			 <jsp:forward page="error.jsp?msg='No estás logeado'"></jsp:forward> 

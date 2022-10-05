@@ -85,13 +85,14 @@ public class Card {
 		this.adquisition = acquisition;
 	}
 
-	public boolean isActive() {
+	public boolean getActive() {
 		return active;
 	}
 
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
 	
 	public boolean addCard(String name,double cost, boolean active) {
 		boolean add=false;
@@ -123,7 +124,7 @@ public class Card {
 			ResultSet rs = sentencia.executeQuery();
 			
 			while(rs.next()) {
-				Card c = new Card("3");
+				Card c = new Card(null);
 				c.setPassword(rs.getString("password"));
 				c.setCode(rs.getInt("codigo"));
 				c.setName(rs.getString("nombre"));

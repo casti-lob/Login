@@ -20,15 +20,11 @@
 			String password = m.getPasswBD();
 			Card c = new Card(password); 
 			int code = Integer.parseInt(request.getParameter("key"));
-			if(c.deleteCard(code)!= false){
+			c.deleteCard(code);
 				%>
-				<jsp:forward page="inicio.html"></jsp:forward>	
+				<jsp:forward page="MostrarCartas.jsp"></jsp:forward>	
 			<%
-			}else{
-				%>
-				<jsp:forward page="error.jsp?msg='No estás logeado'"></jsp:forward>
-				<%
-			}
+			
 			
 		%>
 			
