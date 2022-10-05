@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.swing.JComponent;
@@ -83,10 +85,10 @@ public class Card {
 			}
 		return add;
 	}
-	public String showCard(){
+	public List<String> showCard(){
 		
-		String [] registro = new String[6];
-		StringBuilder modelo = new StringBuilder();
+		List<String> registro = new ArrayList<String>();
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
@@ -96,26 +98,23 @@ public class Card {
 			ResultSet rs = sentencia.executeQuery();
 			while(rs.next()) {
 				
-				registro[0]= "<td>"+ rs.getString("password")+"</td>";
-				registro[1]= "<td>"+rs.getString("codigo")+"</td>";
-				registro[2]= "<td>"+ rs.getString("nombre")+"</td>";
-				registro[3]= "<td>"+rs.getString("precio")+"</td>";
-				registro[4]= "<td>"+rs.getString("adquisicion")+"</td>";
-				registro[5]= "<td><a href='eliminar.jsp?key="+rs.getString("codigo")+"'>Borrar</a></td>";
+				registro.add(rs.getString("password")) ;
+				registro.add(rs.getString("codigo")) ;
+				registro.add(rs.getString("nombre"))  ;
+				registro.add(rs.getString("precio"));
+				registro.add(rs.getString("adquisicion"));
+				registro.add(rs.getString("baraja"));
 				
-				modelo.append("<tr>");
-				for (int i=0;i<registro.length;i++) {
-					modelo.append(registro[i]);
-				}
 				
-				modelo.append("</tr>");
+				
+				
 			}
 			
 			rs.close();
 		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
-		return modelo.toString();
+		return registro;
 		
 		
 	}
@@ -148,25 +147,23 @@ public class Card {
 		return set;
 	}
 	
-	public boolean deleteCard(int code) {
+	public boolean deleteCard(int code) {//codigo y password requeridos
 		boolean delete = false;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
+			PreparedStatement sentencia = cn.prepareStatement("DELETE FROM CARTAS WHERE codigo = ?");
+			sentencia.setInt(1, code);
+			
+			sentencia.executeUpdate();
 			
 			PreparedStatement sentencia2 = cn.prepareStatement("select codigo from CARTAS where codigo =?");
 			sentencia2.setInt(1, code);
 			
-				ResultSet rs = sentencia2.executeQuery();
-				if(rs.next()) {
-					delete = true;
-					PreparedStatement sentencia = cn.prepareStatement("DELETE FROM CARTAS WHERE codigo = ?");
-					sentencia.setInt(1, code);
-					
-					sentencia.executeUpdate();
-				}			
-
-			
+			ResultSet rs = sentencia.executeQuery();
+			if(!rs.next()) {
+				delete = true;
+			}	
 			
 			cn.close();
 		}catch(Exception e){

@@ -16,9 +16,9 @@
 	
 	%>
 	<div align="center">
-		<table border="5" >
+		
 			<%=c.showCard() %>
-		</table>
+		
 	</div>
 	</body>
 </html>
