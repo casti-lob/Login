@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@page import="com.jacaranda.Card"%>
@@ -17,7 +18,24 @@
 	%>
 	<div align="center">
 		
-			<%=c.showCard() %>
+		<%
+		List<Card> list = c.showCard();
+		StringBuilder element = new StringBuilder(); 
+		element.append("<table>");
+		for(int i =0;i<list.size();i++){
+			element.append("<tr>");
+			element.append("<td>"+list.get(0)+"</td>");
+			element.append("<td>"+list.get(1)+"</td>");
+			element.append("<td>"+list.get(2)+"</td>");
+			element.append("<td>"+list.get(3)+"</td>");
+			element.append("<td>"+list.get(4)+"</td>");
+			element.append("</tr>");
+		}
+		element.append("</table>");
+			
+		
+		%>
+		<%= element.toString()%>
 		
 	</div>
 	</body>

@@ -17,15 +17,40 @@ import javax.swing.table.DefaultTableModel;
 
 public class Card {
 	private String password;
+	private int code;
 	private String name;
 	private double price;
-	private LocalDate adquisition ;
+	private String adquisition ;
 	private boolean active;
 	
 	
 	public Card(String password) {
 		super();
 		this.password = password;
+	}
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getAdquisition() {
+		return adquisition;
+	}
+
+	public void setAdquisition(String adquisition) {
+		this.adquisition = adquisition;
 	}
 
 	public String getPassword() {
@@ -52,11 +77,11 @@ public class Card {
 		this.price = prive;
 	}
 
-	public LocalDate getAcquisition() {
+	public String getAcquisition() {
 		return adquisition;
 	}
 
-	public void setAcquisition(LocalDate acquisition) {
+	public void setAcquisition(String acquisition) {
 		this.adquisition = acquisition;
 	}
 
@@ -85,9 +110,9 @@ public class Card {
 			}
 		return add;
 	}
-	public List<String> showCard(){
+	public List<Card> showCard(){
 		
-		List<String> registro = new ArrayList<String>();
+		List<Card> registro = new ArrayList<Card>();
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -96,15 +121,24 @@ public class Card {
 			sentencia.setString(1, password);
 			
 			ResultSet rs = sentencia.executeQuery();
+			
 			while(rs.next()) {
-				
+				Card c = new Card("3");
+				c.setPassword(rs.getString("password"));
+				c.setCode(rs.getInt("codigo"));
+				c.setName(rs.getString("nombre"));
+				c.setPrice(rs.getDouble("precio"));
+				c.setAcquisition(rs.getString("adquisicion"));
+				c.setActive(rs.getBoolean("baraja"));
+				registro.add(c);
+				/*
 				registro.add(rs.getString("password")) ;
 				registro.add(rs.getString("codigo")) ;
 				registro.add(rs.getString("nombre"))  ;
 				registro.add(rs.getString("precio"));
 				registro.add(rs.getString("adquisicion"));
-				registro.add(rs.getString("baraja"));
-				registro.add(rs.getString("<a href='eliminar.jsp?key="+rs.getString("codigo")+"'>Borrar</a>"));
+				registro.add(rs.getString("baraja"));*/
+				//registro.add(rs.getString("<a href='eliminar.jsp?key="+rs.getString("codigo")+"'>Borrar</a>"));
 				
 				
 				
