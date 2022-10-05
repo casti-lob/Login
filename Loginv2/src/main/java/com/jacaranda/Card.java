@@ -166,17 +166,22 @@ public class Card {
 			PreparedStatement sentencia1 = cn.prepareStatement("SELECT baraja FROM CARTAS where codigo =?");
 			sentencia1.setInt(1, code);
 			ResultSet rs = sentencia1.executeQuery();
-			
-			boolean num = false;
-			if(rs.toString().equals("1")) {
-				num = true;
+			rs.next();
+			if(rs.getBoolean("baraja")==false) {
+				 set = true;
 			}
-			PreparedStatement sentencia = cn.prepareStatement("UPDATE CARTAS SET baraja = ? WHERE password = ?;");
-			sentencia.setBoolean(1, num);
+				
+			
+			
+			
+			
+			
+			PreparedStatement sentencia = cn.prepareStatement("UPDATE CARTAS SET baraja = ? WHERE codigo = ?;");
+			sentencia.setBoolean(1, set);
 			sentencia.setInt(2, code);
 			
 			sentencia.executeUpdate();
-			set = true;
+			
 		}catch(Exception e){
 				System.out.println(e.getMessage());
 			}
