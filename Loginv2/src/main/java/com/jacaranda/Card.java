@@ -101,7 +101,8 @@ public class Card {
 				registro[2]= "<td>"+ rs.getString("nombre")+"</td>";
 				registro[3]= "<td>"+rs.getString("precio")+"</td>";
 				registro[4]= "<td>"+rs.getString("adquisicion")+"</td>";
-				registro[5]= "<td>"+rs.getString("baraja")+"</td>";
+				registro[5]= "<td><a href='eliminar.jsp?key="+rs.getString("codigo")+"'>Borrar</a></td>";
+				
 				modelo.append("<tr>");
 				for (int i=0;i<registro.length;i++) {
 					modelo.append(registro[i]);
@@ -147,23 +148,25 @@ public class Card {
 		return set;
 	}
 	
-	public boolean deleteCard(int code) {//codigo y password requeridos
+	public boolean deleteCard(int code) {
 		boolean delete = false;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("DELETE FROM CARTAS WHERE codigo = ?");
-			sentencia.setInt(1, code);
-			
-			sentencia.executeUpdate();
 			
 			PreparedStatement sentencia2 = cn.prepareStatement("select codigo from CARTAS where codigo =?");
 			sentencia2.setInt(1, code);
 			
-			ResultSet rs = sentencia.executeQuery();
-			if(!rs.next()) {
-				delete = true;
-			}	
+				ResultSet rs = sentencia2.executeQuery();
+				if(rs.next()) {
+					delete = true;
+					PreparedStatement sentencia = cn.prepareStatement("DELETE FROM CARTAS WHERE codigo = ?");
+					sentencia.setInt(1, code);
+					
+					sentencia.executeUpdate();
+				}			
+
+			
 			
 			cn.close();
 		}catch(Exception e){
