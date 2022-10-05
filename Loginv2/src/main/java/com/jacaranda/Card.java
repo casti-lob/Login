@@ -104,6 +104,7 @@ public class Card {
 				registro.add(rs.getString("precio"));
 				registro.add(rs.getString("adquisicion"));
 				registro.add(rs.getString("baraja"));
+				registro.add(rs.getString("<a href='eliminar.jsp?key="+rs.getString("codigo")+"'>Borrar</a>"));
 				
 				
 				
