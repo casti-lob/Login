@@ -15,7 +15,7 @@
 		Card c = new Card(m.getPasswBD()); 
 	
 	%>
-	<div >
+	<div align="center">
 		<table border="5" >
 			<%=c.showCard() %>
 		</table>

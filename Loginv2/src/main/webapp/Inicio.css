@@ -2,6 +2,7 @@
 *{
 	font-family: Angelrhapsody;
 	font-size: 40px;
+	
 }
 td{
 	padding: 10px
@@ -28,7 +29,7 @@ body{
 
 @font-face {
   font-family: Angelrhapsody;
-  src: url('Angelrhapsody.ttf') format('truetype');
+  src: url('ARMYD.ttf') format('truetype');
   font-style: normal;
   font-weight: normal;
 }
