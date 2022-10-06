@@ -22,7 +22,7 @@
 			int code = Integer.parseInt(request.getParameter("key"));
 			c.deleteCard(code);
 				%>
-				<jsp:forward page="MostrarCartas.jsp"></jsp:forward>	
+				<jsp:forward page="Main.jsp"></jsp:forward>	
 			<%
 			
 			
@@ -30,7 +30,7 @@
 			
 		 }else{
 		
-			 <jsp:forward page="error.jsp?msg='No estás logeado'"></jsp:forward> 
+			 <jsp:forward page="Wrong.jsp?msg='No estás logeado'"></jsp:forward> 
 		<% 
 		 } 
 		%>

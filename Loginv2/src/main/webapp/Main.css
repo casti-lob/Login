@@ -1,4 +1,16 @@
 @charset "UTF-8";
+
+@font-face {
+  font-family: ARMYD;
+  font-style: normal;
+  font-weight: 400;
+  src: url(ARMYD.ttf) format("truetype"),
+}
+
+*{
+	font-family: ARMYD;
+}
+
 td{
 	padding: 10px
 	

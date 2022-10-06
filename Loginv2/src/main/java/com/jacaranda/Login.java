@@ -14,9 +14,9 @@ public class Login {
 	private String password;
 	private static String passwBD;
 	
-	public Login(String nombre, String password) {
+	public Login(String name, String password) {
 		super();
-		this.name = nombre;
+		this.name = name;
 		this.password = password;
 		passwBD = password;
 	}
@@ -25,12 +25,12 @@ public class Login {
 		
 	}
 	
-	public String getNombre() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.name = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -50,7 +50,7 @@ public class Login {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("select password, nombre from USUARIO where password =? and nombre =?");
+			PreparedStatement sentencia = cn.prepareStatement("select password, name from USER where password =? and name =?");
 			sentencia.setString(1, password);
 			sentencia.setString(2, name);
 			ResultSet rs = sentencia.executeQuery();
@@ -87,6 +87,6 @@ public class Login {
 
 	@Override
 	public String toString() {
-		return "Login [nombre=" + name + ", password=" + password + "]";
+		return "Login [name=" + name + ", password=" + password + "]";
 	}
 }

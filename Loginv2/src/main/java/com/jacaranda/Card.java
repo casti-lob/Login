@@ -20,7 +20,7 @@ public class Card {
 	private int code;
 	private String name;
 	private double price;
-	private String adquisition ;
+	private String acquisition ;
 	private boolean active;
 	
 	
@@ -45,12 +45,12 @@ public class Card {
 		this.price = price;
 	}
 
-	public String getAdquisition() {
-		return adquisition;
+	public String getAcquisition() {
+		return acquisition;
 	}
 
-	public void setAdquisition(String adquisition) {
-		this.adquisition = adquisition;
+	public void setAcquisition(String acquisition) {
+		this.acquisition = acquisition;
 	}
 
 	public String getPassword() {
@@ -69,22 +69,6 @@ public class Card {
 		this.name = name;
 	}
 
-	public double getPrive() {
-		return price;
-	}
-
-	public void setPrive(double prive) {
-		this.price = prive;
-	}
-
-	public String getAcquisition() {
-		return adquisition;
-	}
-
-	public void setAcquisition(String acquisition) {
-		this.adquisition = acquisition;
-	}
-
 	public boolean getActive() {
 		return active;
 	}
@@ -99,7 +83,7 @@ public class Card {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("INSERT INTO CARTAS(password,nombre,precio,adquisicion,baraja) VALUES(?,?,?,NOW(),?)");
+			PreparedStatement sentencia = cn.prepareStatement("INSERT INTO CARD(password,name,price,acquisition,deck_cards) VALUES(?,?,?,NOW(),?)");
 			sentencia.setString(1, this.password);
 			sentencia.setString(2, name);
 			sentencia.setDouble(3, cost);
@@ -118,7 +102,7 @@ public class Card {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("SELECT * FROM CARTAS where password =?");
+			PreparedStatement sentencia = cn.prepareStatement("SELECT * FROM CARD where password =?");
 			sentencia.setString(1, password);
 			
 			ResultSet rs = sentencia.executeQuery();
@@ -126,22 +110,13 @@ public class Card {
 			while(rs.next()) {
 				Card c = new Card(null);
 				c.setPassword(rs.getString("password"));
-				c.setCode(rs.getInt("codigo"));
-				c.setName(rs.getString("nombre"));
-				c.setPrice(rs.getDouble("precio"));
-				c.setAcquisition(rs.getString("adquisicion"));
-				c.setActive(rs.getBoolean("baraja"));
+				c.setCode(rs.getInt("code"));
+				c.setName(rs.getString("name"));
+				c.setPrice(rs.getDouble("price"));
+				c.setAcquisition("acquisition");
+				c.setActive(rs.getBoolean("deck_cards"));
 				registro.add(c);
-				/*
-				registro.add(rs.getString("password")) ;
-				registro.add(rs.getString("codigo")) ;
-				registro.add(rs.getString("nombre"))  ;
-				registro.add(rs.getString("precio"));
-				registro.add(rs.getString("adquisicion"));
-				registro.add(rs.getString("baraja"));*/
-				//registro.add(rs.getString("<a href='eliminar.jsp?key="+rs.getString("codigo")+"'>Borrar</a>"));
-				
-				
+	
 				
 				
 			}
@@ -163,20 +138,15 @@ public class Card {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
 			
-			PreparedStatement sentencia1 = cn.prepareStatement("SELECT baraja FROM CARTAS where codigo =?");
+			PreparedStatement sentencia1 = cn.prepareStatement("SELECT deck_cards FROM CARD where code =?");
 			sentencia1.setInt(1, code);
 			ResultSet rs = sentencia1.executeQuery();
 			rs.next();
-			if(rs.getBoolean("baraja")==false) {
+			if(!rs.getBoolean("deck_cards")) {
 				 set = true;
 			}
-				
 			
-			
-			
-			
-			
-			PreparedStatement sentencia = cn.prepareStatement("UPDATE CARTAS SET baraja = ? WHERE codigo = ?;");
+			PreparedStatement sentencia = cn.prepareStatement("UPDATE CARD SET deck_cards = ? WHERE code = ?;");
 			sentencia.setBoolean(1, set);
 			sentencia.setInt(2, code);
 			
@@ -188,17 +158,17 @@ public class Card {
 		return set;
 	}
 	
-	public boolean deleteCard(int code) {//codigo y password requeridos
+	public boolean deleteCard(int code) {
 		boolean delete = false;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cartas?allowPublicKeyRetrieval=true&useSSL=false","dummy","dummy");
-			PreparedStatement sentencia = cn.prepareStatement("DELETE FROM CARTAS WHERE codigo = ?");
+			PreparedStatement sentencia = cn.prepareStatement("DELETE FROM CARD WHERE code = ?");
 			sentencia.setInt(1, code);
 			
 			sentencia.executeUpdate();
 			
-			PreparedStatement sentencia2 = cn.prepareStatement("select codigo from CARTAS where codigo =?");
+			PreparedStatement sentencia2 = cn.prepareStatement("select code from CARD where code =?");
 			sentencia2.setInt(1, code);
 			
 			ResultSet rs = sentencia.executeQuery();
@@ -234,7 +204,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Cartas [password=" + password + ", name=" + name + ", price=" + price + ", acquisition=" + adquisition
+		return "CARDS [password=" + password + ", name=" + name + ", price=" + price + ", acquisition=" + acquisition
 				+ ", active=" + active + "]";
 	}
 	

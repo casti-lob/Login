@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
 	</head>
 	<body>
 		<%
@@ -21,10 +21,10 @@
 			int code = Integer.parseInt(request.getParameter("key"));
 			c.setCard(code);
 		%>
-				<jsp:forward page="MostrarCartas.jsp"></jsp:forward>
+				<jsp:forward page="Main.jsp"></jsp:forward>
 		 }else{
 		%>
-			 <jsp:forward page="error.jsp?msg='No estás logeado'"></jsp:forward> 
+			 <jsp:forward page="Wrong.jsp?msg='No estás logeado'"></jsp:forward> 
 		<% 
 		 } 
 		%>
