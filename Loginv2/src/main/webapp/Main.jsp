@@ -22,10 +22,10 @@
 			StringBuilder element = new StringBuilder(); 
 			element.append("<table>");
 			element.append("<tr><td align=center colspan=8><img height=300px width=700px  src=https://images.gog-statics.com/934e329b61f010fb039c7a6d82b477ad254bf70a5e0a0709b4c43524645f2a42.jpg> </td></tr>");
-			element.append("<tr><td><b>Contraseña</b></td> <td><b>Código</b></td><td><b>Nombre</b></td><td><b>Precio</b></td><td><b>Fecha Adquisición</b></td><td><b>Carta en Uso</b></td><td><b>Borrar</b></td><td><b>Modificar</b></td></tr>");
+			element.append("<tr> <td><b>Código</b></td><td><b>Nombre</b></td><td><b>Precio</b></td><td><b>Fecha Adquisición</b></td><td><b>Carta en Uso</b></td><td><b>Borrar</b></td><td><b>Modificar</b></td></tr>");
 			for(int i =0;i<list.size();i++){
 				element.append("<tr>");
-				element.append("<td>"+list.get(i).getPassword()+"</td>");
+				
 				element.append("<td>"+list.get(i).getCode()+"</td>");
 				element.append("<td>"+list.get(i).getName()+"</td>");
 				element.append("<td>"+list.get(i).getPrice()+"</td>");
