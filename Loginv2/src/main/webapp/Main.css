@@ -11,12 +11,15 @@
 	font-family: ARMYD;
 }
 
-td{
+tr{
+	text-align:center;
 	padding: 10px
 	
 	
 }
 table{
+	
+  border-collapse: collapse 10px solid black;
 	border-radius: 20px;
 	padding: 10px;
 	background-color:#C3FFEB;
