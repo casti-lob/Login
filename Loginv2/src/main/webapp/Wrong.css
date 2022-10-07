@@ -6,11 +6,15 @@ img{
 	margin-top: 10%;
 }
 
-p{
-	text-align: center;
-	font-size: 35px;
+@font-face {
+  font-family: ARMYD;
+  font-style: normal;
+  src: url(ARMYD.TTF) format("truetype");
 }
 
 *{
+	font-family: ARMYD;
+	font-size: 40px;
+	text-align: center;
 	background-color: red; 
 }

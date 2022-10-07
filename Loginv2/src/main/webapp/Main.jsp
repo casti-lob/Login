@@ -9,6 +9,7 @@
 		<meta charset="ISO-8859-1">
 		<link rel="stylesheet" href="Main.css">
 		<title>Cartas Gwent</title>
+		<link rel="shortcut icon" href="icon.png">
 	</head>
 	<body>
 		<% 
@@ -22,7 +23,7 @@
 			StringBuilder element = new StringBuilder(); 
 			element.append("<table>");
 			element.append("<tr><td align=center colspan=8><img height=300px width=700px  src=https://images.gog-statics.com/934e329b61f010fb039c7a6d82b477ad254bf70a5e0a0709b4c43524645f2a42.jpg> </td></tr>");
-			element.append("<tr> <td><b>Código</b></td><td><b>Nombre</b></td><td><b>Precio</b></td><td><b>Fecha Adquisición</b></td><td><b>Carta en Uso</b></td><td><b>Borrar</b></td><td><b>Modificar</b></td></tr>");
+			element.append("<tr> <td style='padding:10px'><b>Código</b></td style='padding:10px'><td style='padding:10px'><b>Nombre</b></td><td style='padding:10px'><b>Precio</b></td><td style='padding:10px'><b>Adquisición</b></td><td style='padding:10px'><b>En Uso</b></td><td style='padding:10px'><b>Borrar</b></td><td style='padding:10px'><b>Modificar</b></td></tr>");
 			for(int i =0;i<list.size();i++){
 				element.append("<tr>");
 				

@@ -20,8 +20,6 @@ INSERT INTO USER
 VALUES('usuario','usuario');
 INSERT INTO USER (password,name)
 VALUES('1234','Axiont58');
-INSERT INTO USER (password,name)
-VALUES('keo_7','Joseba');
 
 INSERT INTO CARD(password,name,price,acquisition,deck_cards)
 VALUES('usuario','Principe Stennis',6,'2015-01-20',true);
